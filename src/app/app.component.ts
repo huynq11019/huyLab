@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AngularFireMessaging} from "@angular/fire/messaging";
 import {HttpClient} from "@angular/common/http";
 import {Message} from "./models/message";
+import {environment} from "../environments/environment";
 
 @Component({
   selector: 'app-root',
@@ -13,19 +14,19 @@ export class AppComponent implements OnInit{
   messages: Array<Message> = [];
 
   constructor(private msg: AngularFireMessaging, private http: HttpClient) { }
-
+  private api = environment.api;
   ngOnInit() {
 
     this.msg.requestToken.subscribe(token => {
 
       console.log(token);
-      this.http.post('http://localhost:8080/notification', {
+      this.http.post(`http://${this.api}/notification`, {
         target: token,
         title: 'hello world',
         message: 'First notification, kinda nervous',
       }).subscribe(() => {  });
 
-      this.http.post('http://localhost:8080/topic/subscription', {
+      this.http.post(`http://${this.api}/topic/subscription`, {
         topic: 'weather',
         subscriber: token
       }).subscribe(() => {  });
