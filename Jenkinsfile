@@ -24,9 +24,9 @@ node {
 
     stage('deploy') {
         sh "kill \$(lsof -t -i:8094) > /dev/null 2> /dev/null || : "
-//         sh "cd ./dist/mb-amc/ && http-server -p 8021"
-        sh "cp -r dist/fcm-demo-front /var/www/html/test"
-        sh "sudo systemctl reload nginx"
+        sh "cd dist/fcm-demo-front && http-server -p 8021"
+//         sh "cp -r dist/fcm-demo-front /var/www/html/test"
+//         sh "sudo systemctl reload nginx"
     }
 
 }
