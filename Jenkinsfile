@@ -19,6 +19,7 @@ node {
 
     stage('packaging') {
         sh "npm run build"
+        sh "pwd"
     }
 
     stage('deploy') {
