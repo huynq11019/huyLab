@@ -18,7 +18,7 @@ node {
     }
 
     stage('packaging') {
-        sh "npm run --prod"
+        sh "npm run build"
     }
 
     stage('deploy') {
